@@ -131,10 +131,10 @@ func (dp DijkstraPath) OutgoingEdgeForSubPath(p DijkstraPath) []string {
 
 func (dp DijkstraPath) MergeWith(p DijkstraPath) DijkstraPath {
 	ret := DijkstraPath{}
+	// 修正箇所: スライスを正しくコピーする
 	ret.Path = make([]DijkstraPathElement, len(dp.Path))
-	for _, e := range dp.Path {
-		ret.Path = append(ret.Path, e)
-	}
+	copy(ret.Path, dp.Path)
+
 	mergeParent := ret.Path[len(ret.Path)-1]
 	realParent := p.Path[0]
 	j := 0
@@ -153,6 +153,31 @@ func (dp DijkstraPath) MergeWith(p DijkstraPath) DijkstraPath {
 	ret.EndNode = dp.EndNode
 	return ret
 }
+
+// func (dp DijkstraPath) MergeWith(p DijkstraPath) DijkstraPath {
+// 	ret := DijkstraPath{}
+// 	ret.Path = make([]DijkstraPathElement, len(dp.Path))
+// 	for _, e := range dp.Path {
+// 		ret.Path = append(ret.Path, e)
+// 	}
+// 	mergeParent := ret.Path[len(ret.Path)-1]
+// 	realParent := p.Path[0]
+// 	j := 0
+// 	if dp.Path[len(dp.Path)-1].Node == p.Path[0].Node {
+// 		j = 1
+// 	}
+// 	for ; j < len(p.Path); j++ {
+// 		item := p.Path[j]
+// 		item.Weight = mergeParent.Weight + (item.Weight - realParent.Weight)
+// 		ret.Path = append(ret.Path, item)
+// 		mergeParent = item
+// 		realParent = p.Path[j]
+// 	}
+// 	ret.Weight = ret.computeWeight()
+// 	ret.StartNode = dp.StartNode
+// 	ret.EndNode = dp.EndNode
+// 	return ret
+// }
 
 func (dp DijkstraPath) rootPathIterator() dijkstraPathIterator {
 	return dijkstraPathIterator{&dp, 0}
