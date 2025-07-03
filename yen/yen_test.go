@@ -1,9 +1,9 @@
 package yen
 
 import (
-	"github.com/kirves/godijkstra/common/path"
-	"github.com/kirves/godijkstra/common/structs"
-	"github.com/kirves/godijkstra/dijkstra"
+	"github.com/onion0904/godijkstra/common/path"
+	"github.com/onion0904/godijkstra/common/structs"
+	"github.com/onion0904/godijkstra/dijkstra"
 	"testing"
 	"time"
 )
@@ -26,31 +26,31 @@ func init() {
 		"U": struct{}{},
 	}
 	edges := map[string]map[string]interface{}{
-		"A": map[string]interface{}{
+		"A": {
 			"B": struct{}{},
 			"C": struct{}{},
 		},
-		"B": map[string]interface{}{
+		"B": {
 			"D": struct{}{},
 		},
-		"C": map[string]interface{}{
+		"C": {
 			"E": struct{}{},
 			"G": struct{}{},
 		},
-		"D": map[string]interface{}{
+		"D": {
 			"C": struct{}{},
 		},
-		"E": map[string]interface{}{
+		"E": {
 			"F": struct{}{},
 			"G": struct{}{},
 		},
-		"F": map[string]interface{}{
+		"F": {
 			"G": struct{}{},
 		},
-		"G": map[string]interface{}{
+		"G": {
 			"T": struct{}{},
 		},
-		"S": map[string]interface{}{
+		"S": {
 			"A": struct{}{},
 			// "B": struct{}{},
 		},
@@ -75,10 +75,10 @@ func TestMultiplePaths(t *testing.T) {
 		t.Fatal("Didn't find any paths.")
 	}
 	expPath := [][]string{
-		[]string{"S", "A", "C", "G", "T"},
-		[]string{"S", "A", "C", "E", "G", "T"},
-		[]string{"S", "A", "B", "D", "C", "G", "T"},
-		[]string{"S", "A", "C", "E", "F", "G", "T"},
+		{"S", "A", "C", "G", "T"},
+		{"S", "A", "C", "E", "G", "T"},
+		{"S", "A", "B", "D", "C", "G", "T"},
+		{"S", "A", "C", "E", "F", "G", "T"},
 	}
 	for k, p := range paths {
 		for i, v := range p.Path {

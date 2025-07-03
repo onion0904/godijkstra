@@ -38,31 +38,31 @@ func init() {
 		"U": struct{}{},
 	}
 	edges := map[string]map[string]interface{}{
-		"A": map[string]interface{}{
+		"A": {
 			"B": struct{}{},
 			"C": struct{}{},
 		},
-		"B": map[string]interface{}{
+		"B": {
 			"C": struct{}{},
 			"D": struct{}{},
 		},
-		"C": map[string]interface{}{
+		"C": {
 			"E": struct{}{},
 			"G": struct{}{},
 		},
-		"D": map[string]interface{}{
+		"D": {
 			"C": struct{}{},
 		},
-		"E": map[string]interface{}{
+		"E": {
 			"F": struct{}{},
 		},
-		"F": map[string]interface{}{
+		"F": {
 			"G": struct{}{},
 		},
-		"G": map[string]interface{}{
+		"G": {
 			"T": struct{}{},
 		},
-		"S": map[string]interface{}{
+		"S": {
 			"A": struct{}{},
 			// "B": struct{}{},
 		},
@@ -95,9 +95,9 @@ func TestSinglePath(t *testing.T) {
 			t.Fatal("Wrong path.")
 		}
 	}
-	if path.Weight != len(expPath)-1 {
+	if int(path.Weight) != len(expPath)-1 {
 		t.Logf("Path: %#v\n", path)
-		t.Fatalf("Wrong path weight:\nExpected: %d\nGot: %d\n", len(expPath)-1, path.Weight)
+		t.Fatalf("Wrong path weight:\nExpected: %d\nGot: %f\n", len(expPath)-1, path.Weight)
 	}
 }
 
@@ -122,9 +122,9 @@ func TestShortcut(t *testing.T) {
 			t.Fatal("Wrong path.")
 		}
 	}
-	if path.Weight != len(expPath)-1 {
+	if int(path.Weight) != len(expPath)-1 {
 		t.Logf("Path: %#v\n", path)
-		t.Fatalf("Wrong path weight:\nExpected: %d\nGot: %d\n", len(expPath)-1, path.Weight)
+		t.Fatalf("Wrong path weight:\nExpected: %d\nGot: %f\n", len(expPath)-1, path.Weight)
 	}
 
 	graph.edges["C"] = bk

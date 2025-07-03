@@ -24,8 +24,8 @@ package yen
 
 import (
 	"container/heap"
-	"github.com/kirves/godijkstra/common/path"
-	"github.com/kirves/godijkstra/common/structs"
+	"github.com/onion0904/godijkstra/common/path"
+	"github.com/onion0904/godijkstra/common/structs"
 )
 
 func Yen(

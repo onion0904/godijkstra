@@ -17,7 +17,7 @@ limitations under the License.
 package dijkstra
 
 import (
-	"github.com/kirves/godijkstra/common/structs"
+	"github.com/onion0904/godijkstra/common/structs"
 )
 
 // DijkstraQueue is a collecition of DijkstraCandidate elements.

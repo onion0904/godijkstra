@@ -1,3 +1,5 @@
+# This is adapted to float64 for weight.
+
 Go-Dijkstra
 ==========
 

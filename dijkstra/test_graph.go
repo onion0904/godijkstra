@@ -17,7 +17,7 @@ limitations under the License.
 package dijkstra
 
 import (
-	"github.com/kirves/godijkstra/common/structs"
+	"github.com/onion0904/godijkstra/common/structs"
 )
 
 type testGraph struct {
@@ -34,7 +34,7 @@ func (t *testGraph) SuccessorsForNode(node string) []dijkstrastructs.Connection 
 	ret := make([]dijkstrastructs.Connection, len(t.edges[node]))
 	i := 0
 	for k, _ := range t.edges[node] {
-		ret[i] = dijkstrastructs.Connection{k, t.EdgeWeight(node, k)}
+		ret[i] = dijkstrastructs.Connection{Destination:k, Weight: t.EdgeWeight(node, k)}
 		i++
 	}
 	return ret
@@ -44,12 +44,12 @@ func (t *testGraph) PredecessorsFromNode(node string) []dijkstrastructs.Connecti
 	ret := make([]dijkstrastructs.Connection, len(t.reverseEdges[node]))
 	i := 0
 	for k, _ := range t.reverseEdges[node] {
-		ret[i] = dijkstrastructs.Connection{k, t.EdgeWeight(k, node)}
+		ret[i] = dijkstrastructs.Connection{Destination:k, Weight: t.EdgeWeight(k, node)}
 		i++
 	}
 	return ret
 }
 
-func (t *testGraph) EdgeWeight(n1, n2 string) int {
+func (t *testGraph) EdgeWeight(n1, n2 string) float64 {
 	return 1
 }
