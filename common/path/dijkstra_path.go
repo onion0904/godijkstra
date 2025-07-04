@@ -24,7 +24,7 @@ import (
 // Atmoic element of the path reperesented by the DijkstraPath struct
 type DijkstraPathElement struct {
 	Node   string // Node name
-	Weight int    // Weight of the node (as computed by the Dijkstra algorithm)
+	Weight float64    // Weight of the node (as computed by the Dijkstra algorithm)
 }
 
 // The DijkstraPath structure saves all the information about the found path between source and destination
@@ -33,7 +33,7 @@ type DijkstraPathElement struct {
 // and the names of starting and ending nodes for clarity purposes.
 type DijkstraPath struct {
 	Path      []DijkstraPathElement // Successions of DijkstraPathElements
-	Weight    int                   // Weight of the solution
+	Weight    float64                   // Weight of the solution
 	StartNode string                // Name of the starting node
 	EndNode   string                // Name of the target node
 }
@@ -86,7 +86,7 @@ func appendForwardStepToDijkstraPath(dc *dijkstrastructs.DijkstraCandidate, path
 	return append(tmp, newElementFromDijkstraCandidate(dc))
 }
 
-func (dp DijkstraPath) computeWeight() int {
+func (dp DijkstraPath) computeWeight() float64 {
 	return dp.Path[len(dp.Path)-1].Weight
 }
 
@@ -132,9 +132,7 @@ func (dp DijkstraPath) OutgoingEdgeForSubPath(p DijkstraPath) []string {
 func (dp DijkstraPath) MergeWith(p DijkstraPath) DijkstraPath {
 	ret := DijkstraPath{}
 	ret.Path = make([]DijkstraPathElement, len(dp.Path))
-	for i, e := range dp.Path {
-		ret.Path[i] = e
-	}
+	copy(ret.Path, dp.Path)
 	mergeParent := ret.Path[len(ret.Path)-1]
 	realParent := p.Path[0]
 	j := 0

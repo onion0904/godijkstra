@@ -33,16 +33,9 @@ const (
 	BIDIR          // Use bi-directional search algorithm
 )
 
-func newDijkstraCandidate(node string, parent *dijkstrastructs.DijkstraCandidate, w int) *dijkstrastructs.DijkstraCandidate {
-	return &dijkstrastructs.DijkstraCandidate{Node:node, Parent: parent,Weight:  w}
+func newDijkstraCandidate(node string, parent *dijkstrastructs.DijkstraCandidate, w float64) *dijkstrastructs.DijkstraCandidate {
+	return &dijkstrastructs.DijkstraCandidate{Node:node,Parent:  parent,Weight:  w}
 }
-
-// func (cs CandidateSolution) IsEqualTo(sol CandidateSolution) bool {
-// 	if cs.length != sol.length || cs.forwCandidate.node != sol.forwCandidate.node || cs.backCandidate.node != sol.backCandidate.node {
-// 		return false
-// 	}
-// 	return true
-// }
 
 // Dijkstra returns the shortest path within the provided graph object that goes from startNode to endNode nodes.
 // searchType parameter defines the type of algorithm to use.

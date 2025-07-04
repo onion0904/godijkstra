@@ -36,7 +36,7 @@ func init() {
 	forwNodes := []string{"START", "A", "B"}
 	backNodes := []string{"B", "C", "D", "END"}
 	var parent *dijkstrastructs.DijkstraCandidate = nil
-	w := 0
+	w := 0.0
 	for _, v := range forwNodes {
 		dc := dijkstrastructs.DijkstraCandidate{Node: v, Parent: parent, Weight: w}
 		parent = &dc
@@ -44,7 +44,7 @@ func init() {
 	}
 	cs.ForwCandidate = parent
 	parent = nil
-	w = 0
+	w = 0.0
 	for i := len(backNodes) - 1; i >= 0; i-- {
 		dc := dijkstrastructs.DijkstraCandidate{Node: backNodes[i], Parent: parent, Weight: w}
 		parent = &dc
@@ -57,7 +57,7 @@ func init() {
 	forwNodes = []string{"START", "A", "B"}
 	backNodes = []string{"B", "E", "F", "G", "END"}
 	parent = nil
-	w = 0
+	w = 0.0
 	for _, v := range forwNodes {
 		dc := dijkstrastructs.DijkstraCandidate{Node: v, Parent: parent, Weight: w}
 		parent = &dc
@@ -65,7 +65,7 @@ func init() {
 	}
 	cs2.ForwCandidate = parent
 	parent = nil
-	w = 0
+	w = 0.0
 	for i := len(backNodes) - 1; i >= 0; i-- {
 		dc := dijkstrastructs.DijkstraCandidate{Node: backNodes[i], Parent: parent, Weight: w}
 		parent = &dc
@@ -78,7 +78,7 @@ func init() {
 	forwNodes = []string{"B", "J", "K"}
 	backNodes = []string{"K", "L", "END"}
 	parent = nil
-	w = 0
+	w = 0.0
 	for _, v := range forwNodes {
 		dc := dijkstrastructs.DijkstraCandidate{Node: v, Parent: parent, Weight: w}
 		parent = &dc
@@ -86,7 +86,7 @@ func init() {
 	}
 	cs3.ForwCandidate = parent
 	parent = nil
-	w = 0
+	w = 0.0
 	for i := len(backNodes) - 1; i >= 0; i-- {
 		dc := dijkstrastructs.DijkstraCandidate{Node: backNodes[i], Parent: parent, Weight: w}
 		parent = &dc
@@ -137,15 +137,15 @@ func ExampleDijkstraPath_rootPaths() {
 		for _, n := range v.Path {
 			fmt.Printf("%s-", n.Node)
 		}
-		fmt.Printf(" :: w = %d\n", v.Weight)
+		fmt.Printf(" :: w = %f\n", v.Weight)
 	}
 
 	// Output:
-	// START- :: w = 0
-	// START-A- :: w = 1
-	// START-A-B- :: w = 2
-	// START-A-B-C- :: w = 3
-	// START-A-B-C-D- :: w = 4
+	// START- :: w = 0.000000
+	// START-A- :: w = 1.000000
+	// START-A-B- :: w = 2.000000
+	// START-A-B-C- :: w = 3.000000
+	// START-A-B-C-D- :: w = 4.000000
 }
 
 func ExampleDijkstraPath_rootIncluded() {

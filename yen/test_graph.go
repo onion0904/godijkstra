@@ -50,6 +50,6 @@ func (t *testGraph) PredecessorsFromNode(node string) []dijkstrastructs.Connecti
 	return ret
 }
 
-func (t *testGraph) EdgeWeight(n1, n2 string) int {
+func (t *testGraph) EdgeWeight(n1, n2 string) float64 {
 	return 1
 }
