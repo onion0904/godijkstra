@@ -236,22 +236,40 @@ func computeBiDirDijkstra(
 }
 
 func successorsForPath(graph dijkstrastructs.GraphObject, path *dijkstrastructs.DijkstraCandidate, bannedEdges dijkstrastructs.UnusableEdgeMap) []dijkstrastructs.Connection {
+	// 現在のパスに含まれるノードのセットを作成します
+	nodesInPath := make(map[string]bool)
+	for p := path; p != nil; p = p.Parent {
+		nodesInPath[p.Node] = true
+	}
+
 	tmp := graph.SuccessorsForNode(path.Node)
 	ret := make([]dijkstrastructs.Connection, 0)
 	for _, s := range tmp {
+		// 禁止されたエッジでなく、かつ現在のパスにまだ含まれていないノードを候補とします
 		if bannedEdges[path.Node][s.Destination] == nil {
-			ret = append(ret, s)
+			if _, inPath := nodesInPath[s.Destination]; !inPath {
+				ret = append(ret, s)
+			}
 		}
 	}
 	return ret
 }
 
 func predecessorsForPath(graph dijkstrastructs.GraphObject, path *dijkstrastructs.DijkstraCandidate, bannedEdges dijkstrastructs.UnusableEdgeMap) []dijkstrastructs.Connection {
+	// 現在のパスに含まれるノードのセットを作成します
+	nodesInPath := make(map[string]bool)
+	for p := path; p != nil; p = p.Parent {
+		nodesInPath[p.Node] = true
+	}
+
 	tmp := graph.PredecessorsFromNode(path.Node)
 	ret := make([]dijkstrastructs.Connection, 0)
 	for _, s := range tmp {
+		// 禁止されたエッジでなく、かつ現在のパスにまだ含まれていないノードを候補とします
 		if bannedEdges[s.Destination][path.Node] == nil {
-			ret = append(ret, s)
+			if _, inPath := nodesInPath[s.Destination]; !inPath {
+				ret = append(ret, s)
+			}
 		}
 	}
 	return ret

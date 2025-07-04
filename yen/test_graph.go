@@ -51,5 +51,5 @@ func (t *testGraph) PredecessorsFromNode(node string) []dijkstrastructs.Connecti
 }
 
 func (t *testGraph) EdgeWeight(n1, n2 string) float64 {
-	return 1
+	return 1.0
 }
