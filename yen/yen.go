@@ -84,27 +84,7 @@ func Yen(
 			}
 			dp = rp.MergeWith(dp)
 
-			// ★★★ 重複チェック処理を追加 ★★★
-			isDuplicate := false
-			for _, finalPath := range finalList {
-				if finalPath.IsEqual(dp) {
-					isDuplicate = true
-					break
-				}
-			}
-			if !isDuplicate {
-				// 候補の中にも重複がないかチェック
-				for _, candidatePath := range *candidateHeap {
-					if candidatePath.IsEqual(dp) {
-						isDuplicate = true
-						break
-					}
-				}
-			}
-
-			if !isDuplicate {
-				heap.Push(candidateHeap, dp)
-			}
+			heap.Push(candidateHeap, dp)
 		}
 
 	}

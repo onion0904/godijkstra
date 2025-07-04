@@ -26,31 +26,31 @@ func init() {
 		"U": struct{}{},
 	}
 	edges := map[string]map[string]interface{}{
-		"A": {
+		"A": map[string]interface{}{
 			"B": struct{}{},
 			"C": struct{}{},
 		},
-		"B": {
+		"B": map[string]interface{}{
 			"D": struct{}{},
 		},
-		"C": {
+		"C": map[string]interface{}{
 			"E": struct{}{},
 			"G": struct{}{},
 		},
-		"D": {
+		"D": map[string]interface{}{
 			"C": struct{}{},
 		},
-		"E": {
+		"E": map[string]interface{}{
 			"F": struct{}{},
 			"G": struct{}{},
 		},
-		"F": {
+		"F": map[string]interface{}{
 			"G": struct{}{},
 		},
-		"G": {
+		"G": map[string]interface{}{
 			"T": struct{}{},
 		},
-		"S": {
+		"S": map[string]interface{}{
 			"A": struct{}{},
 			// "B": struct{}{},
 		},
@@ -75,10 +75,10 @@ func TestMultiplePaths(t *testing.T) {
 		t.Fatal("Didn't find any paths.")
 	}
 	expPath := [][]string{
-		{"S", "A", "C", "G", "T"},
-		{"S", "A", "C", "E", "G", "T"},
-		{"S", "A", "B", "D", "C", "G", "T"},
-		{"S", "A", "C", "E", "F", "G", "T"},
+		[]string{"S", "A", "C", "G", "T"},
+		[]string{"S", "A", "C", "E", "G", "T"},
+		[]string{"S", "A", "B", "D", "C", "G", "T"},
+		[]string{"S", "A", "C", "E", "F", "G", "T"},
 	}
 	for k, p := range paths {
 		for i, v := range p.Path {

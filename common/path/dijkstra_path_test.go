@@ -36,7 +36,7 @@ func init() {
 	forwNodes := []string{"START", "A", "B"}
 	backNodes := []string{"B", "C", "D", "END"}
 	var parent *dijkstrastructs.DijkstraCandidate = nil
-	w := 0.0
+	w := 0
 	for _, v := range forwNodes {
 		dc := dijkstrastructs.DijkstraCandidate{Node: v, Parent: parent, Weight: w}
 		parent = &dc
@@ -137,15 +137,15 @@ func ExampleDijkstraPath_rootPaths() {
 		for _, n := range v.Path {
 			fmt.Printf("%s-", n.Node)
 		}
-		fmt.Printf(" :: w = %f\n", v.Weight)
+		fmt.Printf(" :: w = %d\n", v.Weight)
 	}
 
 	// Output:
-	// START- :: w = 0.000000
-	// START-A- :: w = 1.000000
-	// START-A-B- :: w = 2.000000
-	// START-A-B-C- :: w = 3.000000
-	// START-A-B-C-D- :: w = 4.000000
+	// START- :: w = 0
+	// START-A- :: w = 1
+	// START-A-B- :: w = 2
+	// START-A-B-C- :: w = 3
+	// START-A-B-C-D- :: w = 4
 }
 
 func ExampleDijkstraPath_rootIncluded() {
@@ -199,9 +199,6 @@ func ExampleDijkstraPath_merge() {
 	fmt.Printf("\n")
 	ret := sp.MergeWith(path3)
 	for _, v := range ret.Path {
-		if v.Node == ""{
-			continue
-		}
 		fmt.Printf("%s-", v.Node)
 	}
 	fmt.Printf("\n")
@@ -216,18 +213,4 @@ func ExampleDijkstraPath_merge() {
 	// START-A-B-J-K-L-END-
 	// W = 6
 	// START-A-B-E-F-G-END-
-}
-
-func ExampleDijkstraPath_value() {
-	it := path.rootPathIterator()
-	for it.next() {
-		fmt.Printf("%v\n", it.path().Path)
-	}
-
-	// Output:
-	// [{START 0}]
-	// [{START 0} {A 1}]
-	// [{START 0} {A 1} {B 2}]
-	// [{START 0} {A 1} {B 2} {C 3}]
-	// [{START 0} {A 1} {B 2} {C 3} {D 4}]
 }

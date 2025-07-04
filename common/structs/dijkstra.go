@@ -21,12 +21,12 @@ package dijkstrastructs
 type DijkstraCandidate struct {
 	Node   string             // Name of the analyzed node
 	Parent *DijkstraCandidate // Parent in the candidate path (used for backtracking)
-	Weight float64                // Weight of the path so far
+	Weight int                // Weight of the path so far
 }
 
 // CandidateSolution is a possibile complete path from source to destination in the provided graph.
 type CandidateSolution struct {
-	Length        float64                // Weight of the solution
+	Length        int                // Weight of the solution
 	ForwCandidate *DijkstraCandidate // Last DijkstraCandidate found in forward search
 	BackCandidate *DijkstraCandidate // Last DijkstraCandidate found in backward search
 }
@@ -34,7 +34,7 @@ type CandidateSolution struct {
 // Connection is an outgoing edge from a given node to node Destination, having weight Weight
 type Connection struct {
 	Destination string // Destination node
-	Weight      float64    // Edge weight
+	Weight      int    // Edge weight
 }
 
 // UnusableEdgeMap is a list of "banned" edges used by the deviation algorithm

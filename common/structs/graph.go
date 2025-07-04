@@ -24,5 +24,5 @@ package dijkstrastructs
 type GraphObject interface {
 	SuccessorsForNode(node string) []Connection    // get successors for node
 	PredecessorsFromNode(node string) []Connection // get predecessors for node
-	EdgeWeight(n1, n2 string) float64                  // get edge weight
+	EdgeWeight(n1, n2 string) int                  // get edge weight
 }

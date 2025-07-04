@@ -33,8 +33,8 @@ const (
 	BIDIR          // Use bi-directional search algorithm
 )
 
-func newDijkstraCandidate(node string, parent *dijkstrastructs.DijkstraCandidate, w float64) *dijkstrastructs.DijkstraCandidate {
-	return &dijkstrastructs.DijkstraCandidate{Node:node, Parent: parent, Weight: w}
+func newDijkstraCandidate(node string, parent *dijkstrastructs.DijkstraCandidate, w int) *dijkstrastructs.DijkstraCandidate {
+	return &dijkstrastructs.DijkstraCandidate{Node:node, Parent: parent,Weight:  w}
 }
 
 // func (cs CandidateSolution) IsEqualTo(sol CandidateSolution) bool {
@@ -89,7 +89,7 @@ func computeVanillaDijkstra(
 	endNode string,
 	bannedEdges dijkstrastructs.UnusableEdgeMap) (dijkstrastructs.CandidateSolution, bool) {
 
-	candidateSolution := dijkstrastructs.CandidateSolution{Length:0, ForwCandidate: nil, BackCandidate: nil}
+	candidateSolution := dijkstrastructs.CandidateSolution{Length:0,ForwCandidate:  nil,BackCandidate:  nil}
 	var succs []dijkstrastructs.Connection
 	visitedNodesF := make(map[string]*dijkstrastructs.DijkstraCandidate)
 
@@ -108,7 +108,7 @@ func computeVanillaDijkstra(
 
 		// check if we reached termination
 		if forwCandidate.Node == endNode {
-			return dijkstrastructs.CandidateSolution{Length:forwCandidate.Weight, ForwCandidate: forwCandidate, BackCandidate: &dijkstrastructs.DijkstraCandidate{Node:endNode, Parent: nil, Weight: 0}}, true
+			return dijkstrastructs.CandidateSolution{Length:forwCandidate.Weight,ForwCandidate:  forwCandidate,BackCandidate:  &dijkstrastructs.DijkstraCandidate{Node:endNode,Parent:  nil,Weight:  0}}, true
 		}
 
 		if _, ok := visitedNodesF[forwCandidate.Node]; ok {
@@ -138,7 +138,7 @@ func computeBiDirDijkstra(
 	endSet []*dijkstrastructs.DijkstraCandidate,
 	bannedEdges dijkstrastructs.UnusableEdgeMap) (dijkstrastructs.CandidateSolution, bool) {
 
-	candidateSolution := dijkstrastructs.CandidateSolution{Length:0, ForwCandidate: nil, BackCandidate: nil}
+	candidateSolution := dijkstrastructs.CandidateSolution{Length:0,ForwCandidate:  nil,BackCandidate:  nil}
 	skipForward := false
 	var succs []dijkstrastructs.Connection
 	visitedNodesF := make(map[string]*dijkstrastructs.DijkstraCandidate)
